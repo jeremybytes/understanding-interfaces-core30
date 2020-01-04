@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.Loader;
 
 namespace PeopleViewer
@@ -15,21 +13,11 @@ namespace PeopleViewer
         {
             LoadAllReaderAssemblies();
 
-            string readerAssemblyName = ConfigurationManager.AppSettings["ReaderAssembly"];
-            string assemblyPath = AppDomain.CurrentDomain.BaseDirectory 
-                                    + "ReaderAssemblies" 
-                                    + Path.DirectorySeparatorChar 
-                                    + readerAssemblyName;
-
-            Assembly readerAssembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(assemblyPath);
-
-            string readerTypeName = ConfigurationManager.AppSettings["ReaderType"];
-            Type readerType = readerAssembly.ExportedTypes
-                .Where(t => t.FullName == readerTypeName).FirstOrDefault();
-
-            object reader = Activator.CreateInstance(readerType);
-            IPersonReader personReader = reader as IPersonReader;
-            return personReader;
+            string repositoryTypeName = ConfigurationManager.AppSettings["ReaderType"];
+            Type repositoryType = Type.GetType(repositoryTypeName);
+            object repository = Activator.CreateInstance(repositoryType);
+            IPersonReader personRepository = repository as IPersonReader;
+            return personRepository;
         }
 
         public static void LoadAllReaderAssemblies()
