@@ -13,11 +13,11 @@ namespace PeopleViewer
         {
             LoadAllReaderAssemblies();
 
-            string repositoryTypeName = ConfigurationManager.AppSettings["ReaderType"];
-            Type repositoryType = Type.GetType(repositoryTypeName);
-            object repository = Activator.CreateInstance(repositoryType);
-            IPersonReader personRepository = repository as IPersonReader;
-            return personRepository;
+            string readerTypeName = ConfigurationManager.AppSettings["ReaderType"];
+            Type readerType = Type.GetType(readerTypeName);
+            object reader = Activator.CreateInstance(readerType);
+            IPersonReader personReader = reader as IPersonReader;
+            return personReader;
         }
 
         public static void LoadAllReaderAssemblies()
