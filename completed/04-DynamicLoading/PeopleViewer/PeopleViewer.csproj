@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(SolutionDir)AdditionalFiles\*.*&quot; &quot;$(TargetDir)&quot; /Y&#xD;&#xA;xcopy &quot;$(SolutionDir)ReaderAssemblies\*.*&quot; &quot;$(TargetDir)ReaderAssemblies\&quot; /Y&#xD;&#xA;" />
+    <Exec Command="xcopy &quot;$(ProjectDir)..\AdditionalFiles\*.*&quot; &quot;$(TargetDir)&quot; /Y&#xD;&#xA;xcopy &quot;$(ProjectDir)..\ReaderAssemblies\*.*&quot; &quot;$(TargetDir)ReaderAssemblies\&quot; /Y" />
   </Target>
 
   <ItemGroup>
