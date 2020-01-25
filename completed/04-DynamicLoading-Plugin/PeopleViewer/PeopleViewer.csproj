@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(ProjectDir)..\AdditionalFiles\*.*&quot; &quot;$(TargetDir)&quot; /Y&#xD;&#xA;xcopy &quot;$(ProjectDir)..\ReaderAssemblies\*.*&quot; &quot;$(TargetDir)ReaderAssemblies\&quot; /Y /s" />
+  </Target>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PersonReader.Interface\PersonReader.Interface.csproj" />
+  </ItemGroup>
+
+</Project>
