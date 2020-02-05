@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PersonReader.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,7 +13,7 @@ namespace PersonReader.SQL
         public SQLReader()
         {
             var optionsBuilder = new DbContextOptionsBuilder<PersonContext>();
-            optionsBuilder.UseSqlite("Data Source=People.db");
+            optionsBuilder.UseSqlite($"Data Source={AppDomain.CurrentDomain.BaseDirectory}People.db");
             options = optionsBuilder.Options;
         }
 
